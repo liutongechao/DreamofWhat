@@ -9,6 +9,8 @@ import { PageIntro } from '@/components/PageIntro'
 import { formatDate } from '@/lib/formatDate'
 import { loadTopDreams } from '@/lib/loadData'
 
+export const runtime = 'edge';
+
 export const metadata: Metadata = {
   title: 'Top Dream Interpretations',
   description:

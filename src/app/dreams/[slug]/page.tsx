@@ -13,6 +13,9 @@ import { Page } from '@/lib/constants'
 import { CustomMDXRenderer } from '@/components/CustomMDXRenderer'
 import { Metadata } from 'next'
 
+export const runtime = 'edge';
+
+
 interface Props {
   params: {
     slug: string

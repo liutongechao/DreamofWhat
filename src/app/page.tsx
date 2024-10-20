@@ -10,6 +10,9 @@ import { StylizedImage } from '@/components/StylizedImage'
 import imageSleeping from '@/images/sleeping.jpg'
 import { Categories } from '@/components/Categories'
 
+export const runtime = 'edge';
+
+
 export const metadata: Metadata = {
   description:
     'We are a development DreamofWhat working at the intersection of design and technology.',

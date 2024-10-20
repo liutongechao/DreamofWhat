@@ -1,6 +1,5 @@
 import { Metadata } from 'next'
 import Link from 'next/link'
-import Image from 'next/image'
 import { Border } from '@/components/Border'
 import { Button } from '@/components/Button'
 import { Container } from '@/components/Container'
@@ -10,6 +9,9 @@ import { notFound } from 'next/navigation'
 import { dreamTypes } from '@/lib/constants'
 import { loadDreamsByCategoryPaged } from '@/lib/loadData'
 import { formatDate } from '@/lib/formatDate'
+
+export const runtime = 'edge';
+
 
 export async function generateMetadata({
   params,
