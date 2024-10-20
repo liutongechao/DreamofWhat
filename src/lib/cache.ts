@@ -118,7 +118,7 @@ async function fetchAndCacheDreamJson(
   url: string,
   type: 'allDreams' | 'topDreams' | string,
 ): Promise<Dream[]> {
-  const response = await fetch(url, { cache: 'no-store' })
+  const response = await fetch(url)
 
   if (!response.ok) {
     return []
@@ -144,7 +144,7 @@ async function fetchAndCacheDreamJson(
 }
 
 async function fetchAndCacheArticleJson(): Promise<Article[]> {
-  const response = await fetch(ALL_ARTICLES_JSON_URL, { cache: 'no-store' })
+  const response = await fetch(ALL_ARTICLES_JSON_URL)
 
   if (!response.ok) {
     return []
