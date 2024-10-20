@@ -2,6 +2,7 @@ import {
   DREAM_MDX_IMG_URL_PREFIX,
   getDreamBySlug,
   getDreamMdxContent,
+  getTopDreams,
 } from '@/lib/cache'
 import { formatDate } from '@/lib/formatDate'
 import { Container } from '@/components/Container'
@@ -16,6 +17,14 @@ interface Props {
   params: {
     slug: string
   }
+}
+
+export async function generateStaticParams() {
+  const dreams = await getTopDreams()
+
+  return dreams.map((dream) => ({
+    slug: dream.url,
+  }))
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {

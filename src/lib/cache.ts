@@ -248,9 +248,7 @@ export async function getAllArticles(): Promise<Article[]> {
   return cache.allArticles
 }
 
-export async function getArticleBySlug(
-  slug: string,
-): Promise<{
+export async function getArticleBySlug(slug: string): Promise<{
   current: Article | undefined
   previous?: Article
   next?: Article
