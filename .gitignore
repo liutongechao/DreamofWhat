@@ -13,10 +13,6 @@ yarn-error.log*
 .next/
 out/
 
-# Tailwind CSS generated files
-*.css
-*.css.map
-
 # Build output
 dist/
 build/
@@ -57,7 +53,3 @@ public/static/uploads/
 # Ignore lockfiles (for project consistency, use yarn.lock, package-lock.json should be excluded)
 package-lock.json
 yarn.lock
-
-# Ignore next-sitemap and robots.txt output
-sitemap.xml
-robots.txt
