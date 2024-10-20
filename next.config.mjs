@@ -7,6 +7,8 @@ const nextConfig = {
   images: {
     domains: [process.env.NEXT_PUBLIC_CDN_DOMAIN],
   },
+
+  output: 'standalone'
 }
 
 export default nextConfig
