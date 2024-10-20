@@ -1,0 +1,5 @@
+# Changelog
+
+## 2024-10-20
+
+- Initial release
