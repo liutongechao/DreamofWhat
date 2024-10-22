@@ -23,7 +23,7 @@ export function Categories() {
                 key={dreamType.id}
                 className="space-y-2 rounded-lg bg-white p-4 text-center shadow-md ring-1 ring-neutral-950/5 transition hover:bg-neutral-50"
               >
-                <Link href={`${CATEGORY_URL_PREFIX + dreamType.typeName}`}>
+                <Link href={`${CATEGORY_URL_PREFIX + dreamType.typeName}?page=1`}>
                   <FadeIn className="flex flex-col items-center justify-center">
                     <Image
                       src={dreamType.logo}
