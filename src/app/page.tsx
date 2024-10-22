@@ -83,7 +83,7 @@ export default async function Home() {
       <Container className="mt-24 flex items-center justify-center sm:mt-32 md:mt-56">
         <FadeIn className="min-[600px] max-w-3xl text-right">
           <h1 className="text-center font-display text-5xl font-semibold tracking-wider text-gray-800 sm:text-left">
-            What do you dream of
+            What do you dream of?
           </h1>
           <SearchBarWithDropdown />
         </FadeIn>

@@ -1,6 +1,6 @@
 'use client'
 
-import { useId, useState } from 'react'
+import { useEffect, useId, useState } from 'react'
 
 import { Button } from '@/components/Button'
 import { Container } from '@/components/Container'
@@ -63,7 +63,9 @@ function ContactForm() {
 
     const { subject, message } = formData
 
-    const mailtoLink = `mailto:info@dreamofwhat.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(message)}`
+    const mailtoLink = `mailto:info@dreamofwhat.com?subject=${encodeURIComponent(
+      subject,
+    )}&body=${encodeURIComponent(message)}`
 
     window.location.href = mailtoLink
   }
@@ -104,6 +106,20 @@ function ContactForm() {
 }
 
 export default function Contact() {
+  useEffect(() => {
+    // Setting the page title and description dynamically
+    document.title = "Contact Us - DreamofWhat";
+    const metaDescription = document.querySelector('meta[name="description"]');
+    if (metaDescription) {
+      metaDescription.setAttribute('content', 'Contact us to discuss your dreams and get in touch for more information.');
+    } else {
+      const newMeta = document.createElement('meta');
+      newMeta.name = "description";
+      newMeta.content = "Contact us to discuss your dreams and get in touch for more information.";
+      document.head.appendChild(newMeta);
+    }
+  }, []);
+
   return (
     <>
       <PageIntro title="Let’s talk about dreams">
