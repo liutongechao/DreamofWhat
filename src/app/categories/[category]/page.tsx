@@ -5,20 +5,22 @@ import { Button } from '@/components/Button'
 import { Container } from '@/components/Container'
 import { FadeIn } from '@/components/FadeIn'
 import { PageIntro } from '@/components/PageIntro'
-import { notFound } from 'next/navigation'
+import { notFound, redirect } from 'next/navigation'
 import { dreamTypes } from '@/lib/constants'
 import { loadDreamsByCategoryPaged } from '@/lib/loadData'
 import { formatDate } from '@/lib/formatDate'
 
 export const runtime = 'edge';
 
-
 export async function generateMetadata({
   params,
+  searchParams,
 }: {
   params: { category: string }
+  searchParams: { page?: string }
 }): Promise<Metadata> {
   const { category } = params
+  const currentPage = parseInt(searchParams.page || '1', 10)
 
   const dreamCategory = dreamTypes.find((item) => item.typeName === category)
 
@@ -30,9 +32,13 @@ export async function generateMetadata({
     }
   }
 
+  const pageTitle = `${dreamCategory.label} Dreams - Page ${currentPage}`
+
+  const pageDescription = `Explore ${dreamCategory.label} dreams on page ${currentPage}. Learn about common dream interpretations and discover more insights.`
+
   return {
-    title: `${dreamCategory.label} Dreams`,
-    description: `Explore the latest articles and insights on ${dreamCategory.label} dreams. Learn about common dream interpretations and find out what your dreams mean.`,
+    title: pageTitle,
+    description: pageDescription,
   }
 }
 
@@ -44,18 +50,31 @@ export default async function Category({
   searchParams: { page?: string }
 }) {
   const { category } = params
-  const currentPage = parseInt(searchParams.page || '1', 10)
+  let currentPage = parseInt(searchParams.page || '1', 10)
 
-  const categoryData = dreamTypes.find((item) => item.typeName === category)
-
-  if (!category || !categoryData) {
-    notFound()
+  // If no page parameter is provided or if it's invalid, redirect to page 1
+  if (!searchParams.page || isNaN(currentPage) || currentPage < 1) {
+    return redirect(`/categories/${category}?page=1`)
   }
 
+  // Find the category data
+  const categoryData = dreamTypes.find((item) => item.typeName === category)
+
+  // If category is invalid, show 404
+  if (!category || !categoryData) {
+    return notFound()
+  }
+
+  // Load the dreams and total pages
   const { dreams, totalPages } = await loadDreamsByCategoryPaged(
     category,
     currentPage,
   )
+
+  // If the currentPage exceeds totalPages, redirect to the last valid page
+  if (currentPage > totalPages) {
+    return redirect(`/categories/${category}?page=${totalPages}`)
+  }
 
   return (
     <>
@@ -116,7 +135,7 @@ export default async function Category({
             <Button
               href={`/categories/${category}?page=${currentPage - 1}`}
               aria-label="Previous Page"
-              disabled={currentPage === 1}
+              disabled={currentPage === 1} // Since `currentPage` is a number, direct comparison works
             >
               Previous
             </Button>
